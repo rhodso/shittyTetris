@@ -152,6 +152,7 @@ void piece::draw(){
             break;
     }
 }
+
 bool piece::checkLanded(){
     return false;
 }

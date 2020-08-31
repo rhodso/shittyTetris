@@ -30,7 +30,7 @@ public:
 
 
 private:
-    //enum type {I, J, L, O, S, T, Z};
+   //type {I, J, L, O, S, T, Z};
 
     int x;
     int y;
