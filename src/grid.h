@@ -34,8 +34,9 @@ public:
 
 	//Other methods
 	void createGrid();
-	void drawGrid();
-	static void resetGrid();
+    static void resetGrid();
+    void drawGrid();
+
 
 private:
 

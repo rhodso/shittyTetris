@@ -2,31 +2,39 @@
 
 void ofApp::setup(){
 	//Setup variables
+    debugger::log("Initalising...");
 	srand (time(NULL));
 	grid::setDoUpdate(true);
 	debugger::setDebug(debug);
 
-	//Log that app has started
-	debugger::log("App started");
+    //Log that application setup has started
+    debugger::log("Setup started");
 
 	//Setup game vars
 	frameCount = 0;
-	tile::setSize(30);
 
 	//Setup grid vars
-	g.setGH(10);
-	g.setGW(10);
-	g.setLineColour(ofColor::fromHex(0xCCCCCC));
+    debugger::log("Setting up grid..");
+    g.setGH(20);
+    g.setGW(10);
+    tile::setSize(45);
+    g.setLineColour(ofColor::fromHex(0xCCCCCC));
 	g.createGrid();
+
+    gme.setupHUD();
 
 	//Setup completed, log
 	debugger::log("Setup complete");
 }
 
-void ofApp::update(){}
+void ofApp::update(){
+
+}
 
 void ofApp::draw(){
+    ofBackground(60);
 	g.drawGrid();
+    gme.drawHUD();
 }
 
 void ofApp::handleKeypresses(){}
