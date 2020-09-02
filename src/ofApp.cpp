@@ -22,22 +22,30 @@ void ofApp::setup(){
 	g.createGrid();
 
     gme.setupHUD();
+    gme.updateGamestate();
 
 	//Setup completed, log
 	debugger::log("Setup complete");
 }
 
 void ofApp::update(){
-
+    frameCount++;
+    gme.updateHUD();
 }
 
 void ofApp::draw(){
     ofBackground(60);
-	g.drawGrid();
+    g.drawGrid();
     gme.drawHUD();
 }
 
-void ofApp::handleKeypresses(){}
+void ofApp::handleKeypresses(){
+    //I key
+    if(keys[105]){
+        gme.incrementScore();
+        keys[100] = false;
+    }
+}
 
 void ofApp::keyPressed(int key){
 	//Log key press

@@ -54,7 +54,6 @@ void uiElement::setTextColour( ofColor _textColour){ textColour = _textColour; }
 
 //Other methods
 void uiElement::draw(){
-    //debugger::log("Entering draw for testElement");
 
     ofRectangle rect = getBitmapStringBoundingBox(text);
     //debugger::log("Got bounding box");
@@ -62,7 +61,7 @@ void uiElement::draw(){
     rect.y = y;
     ofSetColor(bgColour);
     if(!alignLeft){
-        x -= l;
+        rect.x = x - rect.width;
     }
 
     //debugger::log("Drawing rect");
@@ -75,7 +74,6 @@ void uiElement::draw(){
 
 //Stolen from https://forum.openframeworks.cc/t/how-to-get-size-of-ofdrawbitmapstring/22578/7
 ofRectangle getBitmapStringBoundingBox(string _text){
-    debugger::log("Entered getBitmapStringBoundingBox");
     vector<string> lines = ofSplitString(_text, "\n");
     int maxLineLength = 0;
     for(int i = 0; i < (int)lines.size(); i++) {

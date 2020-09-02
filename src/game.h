@@ -26,16 +26,24 @@ class game {
         void setPieceInPlay( bool _pieceInPlay );
         void setHud( ui _hud );
 
+        //Utility methods
+        void incrementScore();
+
         //Other methods
         void setupHUD();
+        void updateHUD();
         void drawHUD();
+
+        void updateGamestate();
 
     private:
         //Variables
         piece* currentPiece;
         piece* nxtPiece;
-        bool pieceInPlay;
+        bool pieceInPlay = false;
         ui hud;
+
+        int score = 0;
 
         enum element {lineCounter, nextPiece};
 
