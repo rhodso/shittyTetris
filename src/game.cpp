@@ -23,24 +23,28 @@ void game::setHud( ui _hud){ hud = _hud; }
 //Other methods
 void game::setupHUD(){
     debugger::log("Adding UI elements to hud");
-    uiElement testElement = uiElement();
-
-    debugger::log("Setting up testElement");
-    testElement.setX(100);
-    testElement.setY(100);
-    testElement.setL(25);
-    testElement.setH(25);
-    testElement.setBgColour(ofColor::red);
-    testElement.setTextColour(ofColor::white);
-    testElement.setAlignLeft(true);
-
-    testElement.setText("Test");
-    hud.addToElementList(&testElement);
-    debugger::log("Added test element");
+    uiElement* testElement = new uiElement();
 
     /*
+    debugger::log("Setting up testElement");
+    testElement->setX(100);
+    testElement->setY(100);
+    testElement->setL(25);
+    testElement->setH(25);
+    testElement->setBgColour(ofColor::red);
+    testElement->setTextColour(ofColor::white);
+    testElement->setAlignLeft(true);
+
+    testElement->setText("Test");
+    hud.addToElementList(testElement);
+
+
+    debugger::log("Added test element");
+    */
+
+
     //Setup lineCounter uiElement
-    uiElement lineCounter = uiElement(
+    uiElement* lineCounter = new uiElement(
                 (grid::getOffsetX() + (grid::getGW()*tile::getSize())),
                 grid::getOffsetY(),
                 100,
@@ -49,11 +53,11 @@ void game::setupHUD(){
                 ofColor::black,
                 ofColor::white
                 );
-    lineCounter.setText("Line Counter");
-    hud.addToElementList(&lineCounter);
+    lineCounter->setText("Line Counter");
+    hud.addToElementList(lineCounter);
 
     //Setup next piece uiElement
-    uiElement nextPiece = uiElement(
+    uiElement* nextPiece = new uiElement(
                 grid::getOffsetX(),
                 grid::getOffsetY(),
                 100,
@@ -62,9 +66,9 @@ void game::setupHUD(){
                 ofColor::black,
                 ofColor::white
                 );
-    nextPiece.setText("Next Piece");
-    hud.addToElementList(&nextPiece);
-    */
+    nextPiece->setText("Next Piece");
+    hud.addToElementList(nextPiece);
+
 }
 
 void game::drawHUD(){

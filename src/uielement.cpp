@@ -54,60 +54,30 @@ void uiElement::setTextColour( ofColor _textColour){ textColour = _textColour; }
 
 //Other methods
 void uiElement::draw(){
-    debugger::log("Entering draw for testElement");
-    /*
+    //debugger::log("Entering draw for testElement");
+
     ofRectangle rect = getBitmapStringBoundingBox(text);
-    debugger::log("Got bounding box");
+    //debugger::log("Got bounding box");
     rect.x = x;
     rect.y = y;
     ofSetColor(bgColour);
     if(!alignLeft){
         x -= l;
     }
-    */
 
-    debugger::log("Setting up rect");
-
-    std::string msg = "This uiElement: X = ";
-    msg += std::to_string(x);
-    msg += ", Y = ";
-    msg += std::to_string(y);
-    msg += ", L = ";
-    msg += std::to_string(l);
-    msg += ", H = ";
-    msg += std::to_string(h);
-
-    debugger::log(msg);
-
-    ofSetColor(ofColor::red);
-    ofRectangle rect = ofRectangle();
-    rect.x = 100;
-    rect.y = 100;
-    rect.width = 25;
-    rect.height = 25;
-
-    debugger::log("Drawing rect");
+    //debugger::log("Drawing rect");
     ofDrawRectangle(rect.x, rect.y, rect.width, rect.height);
 
-    //ofSetColor(ofColor::red);
-    //ofDrawRectangle(100,100,25,25);
-
-    /*
-    debugger::log("Drawing text");
+    //debugger::log("Drawing text");
     ofSetColor(textColour);
     ofDrawBitmapString(text, rect.x, rect.y + 11);
-    */
-
-    debugger::log("Finished");
 }
 
 //Stolen from https://forum.openframeworks.cc/t/how-to-get-size-of-ofdrawbitmapstring/22578/7
 ofRectangle getBitmapStringBoundingBox(string _text){
     debugger::log("Entered getBitmapStringBoundingBox");
     vector<string> lines = ofSplitString(_text, "\n");
-    debugger::log("1");
     int maxLineLength = 0;
-    debugger::log("2");
     for(int i = 0; i < (int)lines.size(); i++) {
         // tabs are not rendered
         const string & line(lines[i]);
