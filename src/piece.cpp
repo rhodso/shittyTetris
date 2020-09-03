@@ -81,15 +81,15 @@ void piece::draw(){
                 case 3: // Horizontal Upper
                         /*
                          *  O O O O
+                         *  2 1 3 4
                          *  O O O O
-                         *  4 3 1 2
                          *  O O O O
                         */
 
-                        grid::setTileColour(x,y,c); //1
-                        grid::setTileColour(x+1,y,c); //2
-                        grid::setTileColour(x-1,y,c); //3
-                        grid::setTileColour(x-2,y,c); //4
+                        grid::setTileColour(x,y-1,c); //1
+                        grid::setTileColour(x-1,y-1,c); //2
+                        grid::setTileColour(x+1,y-1,c); //3
+                        grid::setTileColour(x+2,y-1,c); //4
 
                     break;
                 default:
@@ -170,16 +170,16 @@ void piece::draw(){
 
                     grid::setTileColour(x,y,c); //1
                     grid::setTileColour(x+1,y,c); //2
-                    grid::setTileColour(x,y+1,c); //3
-                    grid::setTileColour(x,y+2,c); //4
+                    grid::setTileColour(x,y-1,c); //3
+                    grid::setTileColour(x,y-2,c); //4
 
                     break;
                 case 1: //
                     /*
                      *  O O O O
-                     *  O O O O
                      *  O 1 3 4
                      *  O 2 O O
+                     *  O O O O
                     */
 
                     grid::setTileColour(x,y,c); //1
@@ -191,9 +191,9 @@ void piece::draw(){
                 case 2: //
                     /*
                      *  O O O O
-                     *  O 2 1 O
-                     *  O O 3 O
-                     *  O O 4 O
+                     *  2 1 O O
+                     *  O 3 O O
+                     *  O 4 O O
                     */
 
                     grid::setTileColour(x,y,c); //1
@@ -204,9 +204,9 @@ void piece::draw(){
                     break;
                 case 3: //
                     /*
-                     *  O O O O
                      *  O O 2 O
                      *  4 3 1 O
+                     *  O O O O
                      *  O O O O
                     */
 
@@ -254,7 +254,7 @@ void piece::draw(){
                     */
 
                     grid::setTileColour(x,y,c); //1
-                    grid::setTileColour(x,y,c); //2
+                    grid::setTileColour(x+1,y,c); //2
                     grid::setTileColour(x,y-1,c); //3
                     grid::setTileColour(x-1,y-1,c); //4
 
@@ -284,7 +284,7 @@ void piece::draw(){
 
                     grid::setTileColour(x,y,c); //1
                     grid::setTileColour(x-1,y,c); //2
-                    grid::setTileColour(x+1,y,c); //3
+                    grid::setTileColour(x,y+1,c); //3
                     grid::setTileColour(x+1,y+1,c); //4
 
 
@@ -327,28 +327,28 @@ void piece::draw(){
                     /*
                      *  O O O O
                      *  O 2 O O
-                     *  O 1 3 O
+                     *  4 1 3 O
                      *  O 4 O O
                     */
 
                     grid::setTileColour(x,y,c); //1
                     grid::setTileColour(x,y-1,c); //2
                     grid::setTileColour(x+1,y,c); //3
-                    grid::setTileColour(x,y+1,c); //4
+                    grid::setTileColour(x-1,y,c); //4
 
                     break;
                 case 3: //
                     /*
                      *  O O O O
-                     *  O O O O
-                     *  4 1 2 O
+                     *  O 4 O O
+                     *  O 1 2 O
                      *  O 3 O O
                     */
 
                     grid::setTileColour(x,y,c); //1
                     grid::setTileColour(x+1,y,c); //2
                     grid::setTileColour(x,y+1,c); //3
-                    grid::setTileColour(x-1,y,c); //4
+                    grid::setTileColour(x,y-1,c); //4
 
                     break;
                 default:

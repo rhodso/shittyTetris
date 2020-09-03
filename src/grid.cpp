@@ -58,13 +58,13 @@ void grid::createGrid(){
 	gameSpace.clear();
 
 	//Setup the tiles and add to gameSpace
-	for(int i = 0; i < gH; i++){
+    for(int i = 0; i < gW; i++){
 		std::vector<tile> tmp;
-		for(int j = 0; j < gW; j++){
+        for(int j = 0; j < gH; j++){
 			//Create tile and assign X/Y/black
-			tile a = tile(((tile::getSize()*j) + offsetX), ((tile::getSize()*i) + offsetY), ofColor::black);
-            a.setGridX(j);
-            a.setGridY(i);
+            tile a = tile(((tile::getSize()*i) + offsetX), ((tile::getSize()*j) + offsetY), ofColor::black);
+            a.setGridX(i);
+            a.setGridY(j);
 
 			//Push to back of tile queue
 			tmp.push_back(a);
@@ -83,11 +83,11 @@ void grid::drawGrid(){
 	ofSetLineWidth(5);
 
 	//Draw the tiles
-    for(int i = 0; i < gH; i++){
-        for(int j = 0; j < gW; j++){
-            gameSpace[i][j].draw();
-		}
-	}
+    for(vector<tile> x : gameSpace){
+        for(tile t : x){
+            t.draw();
+        }
+    }
 
 	//Lines drawing setup
 	ofNoFill();
@@ -110,18 +110,18 @@ void grid::drawGrid(){
 
 void grid::drawGridDebug(){
     //Draw the tiles
-    for(int i = 0; i < gH; i++){
-        for(int j = 0; j < gW; j++){
-            gameSpace[i][j].debugDraw();
+    for(vector<tile> x : gameSpace){
+        for(tile t : x){
+            t.debugDraw();
         }
     }
 }
 
 void grid::resetGrid(){
-	//This could be multithreaded if optimisations are needed
-	for(int i = 0; i < gH; i++){
-		for(int j = 0; j < gW; j++){
-			setTileColour(i,j,ofColor::black);
-		}
-	}
+    //This could be multithreaded if optimisations are needed
+        for(int i = 0; i < gW; i++){
+            for(int j = 0; j < gH; j++){
+                setTileColour(i,j,ofColor::black);
+            }
+        }
 }

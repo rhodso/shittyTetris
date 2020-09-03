@@ -28,7 +28,7 @@ void ofApp::setup(){
 	debugger::log("Setup complete");
 
     debugger::log("Creating test piece");
-    //p = piece(5,5,0,0, ofColor::darkBlue);
+    p = piece(5,5,6,0, ofColor::darkBlue);
 }
 
 void ofApp::update(){
@@ -47,16 +47,18 @@ void ofApp::update(){
 
 void ofApp::draw(){
     ofBackground(60);
-    //p.draw();
+     p.draw();
     gme.drawHUD();
 
+    /*
     g.setTileColour(0,0,ofColor::blue);
     g.setTileColour(5,0,ofColor::green);
     g.setTileColour(0,5,ofColor::red);
     g.setTileColour(5,5,ofColor::yellow);
+    */
 
     g.drawGrid();
-    g.drawGridDebug();
+    //g.drawGridDebug();
 
     ofSetColor(ofColor::blue);
     ofDrawCircle(10,10,10);
