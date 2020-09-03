@@ -35,3 +35,8 @@ void tile::draw(){
 	ofSetColor(colour);
 	ofDrawRectangle(x-(size/2.0),y-(size/2.0),size,size);
 }
+
+void tile::debugDraw(){
+    if(colour == ofColor::black){ ofSetColor(ofColor::white); } else { ofSetColor(ofColor::black); }
+    ofDrawBitmapString("X:" + std::to_string((int) x) + "\nY:" + std::to_string((int) y) + "\n(" + std::to_string((int) gridX) + "," + std::to_string((int) gridY) + ")",x-(size/2.0),y-10);
+}

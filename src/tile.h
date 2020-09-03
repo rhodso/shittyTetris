@@ -28,6 +28,7 @@ public:
 
 	//Draw the tile
 	void draw();
+    void debugDraw();
 
 private:
 

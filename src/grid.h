@@ -36,6 +36,7 @@ public:
 	void createGrid();
     static void resetGrid();
     void drawGrid();
+    void drawGridDebug();
 
 
 private:

@@ -54,7 +54,6 @@ void grid::createGrid(){
 	msg = "Tile Size = "; msg += std::to_string(tile::getSize());
 	debugger::log(msg);
 
-
 	//Clear gameSpace
 	gameSpace.clear();
 
@@ -64,8 +63,8 @@ void grid::createGrid(){
 		for(int j = 0; j < gW; j++){
 			//Create tile and assign X/Y/black
 			tile a = tile(((tile::getSize()*j) + offsetX), ((tile::getSize()*i) + offsetY), ofColor::black);
-			a.setGridX(i);
-			a.setGridY(j);
+            a.setGridX(j);
+            a.setGridY(i);
 
 			//Push to back of tile queue
 			tmp.push_back(a);
@@ -84,9 +83,9 @@ void grid::drawGrid(){
 	ofSetLineWidth(5);
 
 	//Draw the tiles
-	for(int i = 0; i < gW; i++){
-		for(int j = 0; j < gH; j++){
-			gameSpace[j][i].draw();
+    for(int i = 0; i < gH; i++){
+        for(int j = 0; j < gW; j++){
+            gameSpace[i][j].draw();
 		}
 	}
 
@@ -107,6 +106,15 @@ void grid::drawGrid(){
 		}
 	}
     ofFill();
+}
+
+void grid::drawGridDebug(){
+    //Draw the tiles
+    for(int i = 0; i < gH; i++){
+        for(int j = 0; j < gW; j++){
+            gameSpace[i][j].debugDraw();
+        }
+    }
 }
 
 void grid::resetGrid(){

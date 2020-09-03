@@ -40,4 +40,6 @@ private:
     grid g;
     game gme;
 
+    piece p;
+
 };

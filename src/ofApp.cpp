@@ -26,25 +26,81 @@ void ofApp::setup(){
 
 	//Setup completed, log
 	debugger::log("Setup complete");
+
+    debugger::log("Creating test piece");
+    //p = piece(5,5,0,0, ofColor::darkBlue);
 }
 
 void ofApp::update(){
+    //debugger::log("P - X: " + std::to_string(p.getX()) + ", Y: " + std::to_string(p.getY()));
     frameCount++;
+    handleKeypresses();
     gme.updateHUD();
+
+    if(grid::getDoUpdate()){
+        grid::resetGrid();
+    }
+
+    //debugger::log("Key 32 state: " + std::to_string(keys[32]));
+
 }
 
 void ofApp::draw(){
     ofBackground(60);
-    g.drawGrid();
+    //p.draw();
     gme.drawHUD();
+
+    g.setTileColour(0,0,ofColor::blue);
+    g.setTileColour(5,0,ofColor::green);
+    g.setTileColour(0,5,ofColor::red);
+    g.setTileColour(5,5,ofColor::yellow);
+
+    g.drawGrid();
+    g.drawGridDebug();
+
+    ofSetColor(ofColor::blue);
+    ofDrawCircle(10,10,10);
+    ofSetColor(ofColor::green);
+    ofDrawCircle(60,10,10);
+    ofSetColor(ofColor::red);
+    ofDrawCircle(10,60,10);
+    ofSetColor(ofColor::yellow);
+    ofDrawCircle(60,60,10);
+
+
 }
 
 void ofApp::handleKeypresses(){
-    //I key
-    if(keys[105]){
-        gme.incrementScore();
+    //Space
+    if(keys[32]){
+        p.rotate();
+        keys[32] = false;
+    }
+
+    //A
+    if(keys[97]){
+        p.moveLeft();
+        keys[97] = false;
+    }
+
+    //D
+    if(keys[100]){
+        p.moveRight();
         keys[100] = false;
     }
+
+    //S
+    if(keys[115]){
+        p.moveDown();
+        keys[115] = false;
+    }
+
+    //Enter
+    if(keys[13]){
+        //p.drop();
+        keys[13] = false;
+    }
+
 }
 
 void ofApp::keyPressed(int key){
