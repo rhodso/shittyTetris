@@ -28,7 +28,7 @@ void ofApp::setup(){
 	debugger::log("Setup complete");
 
     debugger::log("Creating test piece");
-    p = piece(5,5,6,0, ofColor::darkBlue);
+    p = piece(5,5,0,0, ofColor::darkBlue);
 }
 
 void ofApp::update(){

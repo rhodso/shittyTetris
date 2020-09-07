@@ -435,6 +435,8 @@ bool piece::checkLanded(){
                         */
 
 
+
+
                     break;
                 case 1: // Horizontal Lower
                         /*
@@ -711,13 +713,901 @@ bool piece::checkLanded(){
 
 }
 void piece::moveDown(){
-    y++;
+
+    int trgX = 0;
+    int trgY = 0;
+
+    if(y < grid::getGH()){
+        switch(type){
+            case 0: //I
+                switch(spin){
+                    case 0: // Vertical Left
+                            /*
+                             *  O 4 O O
+                             *  O 3 O O
+                             *  O 1 O O
+                             *  O 2 O O
+                            */
+
+                            trgX = x;
+                            trgY = y + 3;
+
+                            if(grid::getTileColour(trgX, trgY) != ofColor::black){
+                                y++;
+                            }
+
+                        break;
+                    case 1: // Horizontal Lower
+                            /*
+                             *  O O O O
+                             *  O O O O
+                             *  2 1 3 4
+                             *  O O O O
+                            */
+
+                            if(grid::getTileColour(x, y--) != ofColor::black){
+                                if(grid::getTileColour(x--, y--) != ofColor::black){
+                                    if(grid::getTileColour(x++, y--) != ofColor::black){
+                                        if(grid::getTileColour(x -= 2, y--) != ofColor::black){
+                                            y++;
+                                        }
+                                    }
+                                }
+                            }
+
+                        break;
+                    case 2: // Vertical Right
+                            /*
+                             *  O O 4 O
+                             *  O O 3 O
+                             *  O O 1 O
+                             *  O O 2 O
+                            */
+
+                            trgX = x;
+                            trgY = y + 3;
+
+                            if(grid::getTileColour(trgX, trgY) != ofColor::black){
+                                y++;
+                            }
+
+
+                        break;
+                    case 3: // Horizontal Upper
+                            /*
+                             *  O O O O
+                             *  2 1 3 4
+                             *  O O O O
+                             *  O O O O
+                            */
+
+                            if(grid::getTileColour(x, y--) != ofColor::black){
+                                if(grid::getTileColour(x--, y--) != ofColor::black){
+                                    if(grid::getTileColour(x++, y--) != ofColor::black){
+                                        if(grid::getTileColour(x -= 2, y--) != ofColor::black){
+                                            y++;
+                                        }
+                                    }
+                                }
+                            }
+
+                        break;
+                    default:
+                        break;
+                }
+                break;
+//            case 1: //J
+//                switch(spin){
+//                    case 0: //
+//                        /*
+//                         *  O 4 O O
+//                         *  O 3 O O
+//                         *  2 1 O O
+//                         *  O O O O
+//                        */
+
+
+//                        break;
+//                    case 1: //
+//                        /*
+//                         *  O O O O
+//                         *  O 2 O O
+//                         *  O 1 3 4
+//                         *  O O O O
+//                        */
+
+
+//                        break;
+//                    case 2: //
+//                        /*
+//                         *  O O O O
+//                         *  O 1 2 O
+//                         *  O 3 O O
+//                         *  O 4 O O
+//                        */
+
+//                        break;
+//                    case 3: //
+//                        /*
+//                         *  O O O O
+//                         *  4 3 1 O
+//                         *  O O 2 O
+//                         *  O O O O
+//                        */
+
+
+//                        break;
+//                    default:
+//                        break;
+//                }
+//                break;
+//            case 2: //L
+//                switch(spin){
+//                    case 0: //
+//                        /*
+//                         *  O 4 O O
+//                         *  O 3 O O
+//                         *  O 1 2 O
+//                         *  O O O O
+//                        */
+
+
+//                        break;
+//                    case 1: //
+//                        /*
+//                         *  O O O O
+//                         *  O O O O
+//                         *  O 1 3 4
+//                         *  O 2 O O
+//                        */
+
+
+//                        break;
+//                    case 2: //
+//                        /*
+//                         *  O O O O
+//                         *  O 2 1 O
+//                         *  O O 3 O
+//                         *  O O 4 O
+//                        */
+
+
+//                        break;
+//                    case 3: //
+//                        /*
+//                         *  O O O O
+//                         *  O O 2 O
+//                         *  4 3 1 O
+//                         *  O O O O
+//                        */
+
+
+//                        break;
+//                    default:
+//                        break;
+//                }
+//                break;
+//            case 3: //O
+
+
+//                break;
+//            case 4: //S
+//                switch(spin){
+//                        case 0: //
+//                        /*
+//                         *  O O O O
+//                         *  O 2 o O
+//                         *  3 1 o O
+//                         *  4 O O O
+//                        */
+
+//                        break;
+//                    case 1: //
+//                        /*
+//                         *  O O O O
+//                         *  4 3 O O
+//                         *  O 1 2 O
+//                         *  O O O O
+//                        */
+
+
+
+//                        break;
+//                    case 2: //
+//                        /*
+//                         *  O O O O
+//                         *  O O 4 O
+//                         *  O 1 3 O
+//                         *  O 2 O O
+//                        */
+
+
+//                        break;
+//                    case 3: //
+//                        /*
+//                         *  O O O O
+//                         *  O O O O
+//                         *  2 1 O O
+//                         *  O 3 4 O
+//                        */
+
+
+
+//                        break;
+//                    default:
+//                        break;
+//                }
+//                break;
+//            case 5: //T
+//                switch(spin){
+//                    case 0: //
+//                        /*
+//                         *  O O O O
+//                         *  O O O O
+//                         *  3 1 4 O
+//                         *  O 2 O O
+//                        */
+
+
+//                        break;
+//                    case 1: //
+//                        /*
+//                         *  O O O O
+//                         *  O 3 O O
+//                         *  2 1 O O
+//                         *  O 4 O O
+//                        */
+
+
+//                        break;
+//                    case 2: //
+//                        /*
+//                         *  O O O O
+//                         *  O 2 O O
+//                         *  O 1 3 O
+//                         *  O 4 O O
+//                        */
+
+
+//                        break;
+//                    case 3: //
+//                        /*
+//                         *  O O O O
+//                         *  O O O O
+//                         *  4 1 2 O
+//                         *  O 3 O O
+//                        */
+
+
+//                        break;
+//                    default:
+//                        break;
+//                }
+//                break;
+//            case 6: //Z
+//                switch(spin){
+//                    case 0: //
+//                        /*
+//                         *  O O O O
+//                         *  O 2 O O
+//                         *  3 1 O O
+//                         *  4 O O O
+//                        */
+
+
+//                        break;
+//                    case 1: //
+//                        /*
+//                         *  O O O O
+//                         *  4 3 O O
+//                         *  O 1 2 O
+//                         *  O O O O
+//                        */
+
+
+//                        break;
+//                    case 2: //
+//                        /*
+//                         *  O O O O
+//                         *  O O 4 O
+//                         *  O 1 3 O
+//                         *  O 2 O O
+//                        */
+
+
+//                        break;
+//                    case 3: //
+//                        /*
+//                         *  O O O O
+//                         *  O O O O
+//                         *  2 1 O O
+//                         *  O 3 4 O
+//                        */
+
+//                        break;
+//                    default:
+//                        break;
+//                }
+//                break;
+//            default:
+//                break;
+//        }
+    }
+    }
 }
 void piece::moveLeft(){
-    x--;
+    switch(type){
+        case 0: //I
+            switch(spin){
+                case 0: // Vertical Left
+                        /*
+                         *  O 4 O O
+                         *  O 3 O O
+                         *  O 1 O O
+                         *  O 2 O O
+                        */
+
+
+
+                    break;
+                case 1: // Horizontal Lower
+                        /*
+                         *  O O O O
+                         *  O O O O
+                         *  2 1 3 4
+                         *  O O O O
+                        */
+
+
+                    break;
+                case 2: // Vertical Right
+                        /*
+                         *  O O 4 O
+                         *  O O 3 O
+                         *  O O 1 O
+                         *  O O 2 O
+                        */
+
+
+                    break;
+                case 3: // Horizontal Upper
+                        /*
+                         *  O O O O
+                         *  2 1 3 4
+                         *  O O O O
+                         *  O O O O
+                        */
+
+
+                    break;
+                default:
+                    break;
+            }
+            break;
+        case 1: //J
+            switch(spin){
+                case 0: //
+                    /*
+                     *  O 4 O O
+                     *  O 3 O O
+                     *  2 1 O O
+                     *  O O O O
+                    */
+
+
+                    break;
+                case 1: //
+                    /*
+                     *  O O O O
+                     *  O 2 O O
+                     *  O 1 3 4
+                     *  O O O O
+                    */
+
+
+                    break;
+                case 2: //
+                    /*
+                     *  O O O O
+                     *  O 1 2 O
+                     *  O 3 O O
+                     *  O 4 O O
+                    */
+
+                    break;
+                case 3: //
+                    /*
+                     *  O O O O
+                     *  4 3 1 O
+                     *  O O 2 O
+                     *  O O O O
+                    */
+
+
+                    break;
+                default:
+                    break;
+            }
+            break;
+        case 2: //L
+            switch(spin){
+                case 0: //
+                    /*
+                     *  O 4 O O
+                     *  O 3 O O
+                     *  O 1 2 O
+                     *  O O O O
+                    */
+
+
+                    break;
+                case 1: //
+                    /*
+                     *  O O O O
+                     *  O O O O
+                     *  O 1 3 4
+                     *  O 2 O O
+                    */
+
+
+                    break;
+                case 2: //
+                    /*
+                     *  O O O O
+                     *  O 2 1 O
+                     *  O O 3 O
+                     *  O O 4 O
+                    */
+
+
+                    break;
+                case 3: //
+                    /*
+                     *  O O O O
+                     *  O O 2 O
+                     *  4 3 1 O
+                     *  O O O O
+                    */
+
+
+                    break;
+                default:
+                    break;
+            }
+            break;
+        case 3: //O
+
+
+            break;
+        case 4: //S
+            switch(spin){
+                    case 0: //
+                    /*
+                     *  O O O O
+                     *  O 2 o O
+                     *  3 1 o O
+                     *  4 O O O
+                    */
+
+                    break;
+                case 1: //
+                    /*
+                     *  O O O O
+                     *  4 3 O O
+                     *  O 1 2 O
+                     *  O O O O
+                    */
+
+
+
+                    break;
+                case 2: //
+                    /*
+                     *  O O O O
+                     *  O O 4 O
+                     *  O 1 3 O
+                     *  O 2 O O
+                    */
+
+
+                    break;
+                case 3: //
+                    /*
+                     *  O O O O
+                     *  O O O O
+                     *  2 1 O O
+                     *  O 3 4 O
+                    */
+
+
+
+                    break;
+                default:
+                    break;
+            }
+            break;
+        case 5: //T
+            switch(spin){
+                case 0: //
+                    /*
+                     *  O O O O
+                     *  O O O O
+                     *  3 1 4 O
+                     *  O 2 O O
+                    */
+
+
+                    break;
+                case 1: //
+                    /*
+                     *  O O O O
+                     *  O 3 O O
+                     *  2 1 O O
+                     *  O 4 O O
+                    */
+
+
+                    break;
+                case 2: //
+                    /*
+                     *  O O O O
+                     *  O 2 O O
+                     *  O 1 3 O
+                     *  O 4 O O
+                    */
+
+
+                    break;
+                case 3: //
+                    /*
+                     *  O O O O
+                     *  O O O O
+                     *  4 1 2 O
+                     *  O 3 O O
+                    */
+
+
+                    break;
+                default:
+                    break;
+            }
+            break;
+        case 6: //Z
+            switch(spin){
+                case 0: //
+                    /*
+                     *  O O O O
+                     *  O 2 O O
+                     *  3 1 O O
+                     *  4 O O O
+                    */
+
+
+                    break;
+                case 1: //
+                    /*
+                     *  O O O O
+                     *  4 3 O O
+                     *  O 1 2 O
+                     *  O O O O
+                    */
+
+
+                    break;
+                case 2: //
+                    /*
+                     *  O O O O
+                     *  O O 4 O
+                     *  O 1 3 O
+                     *  O 2 O O
+                    */
+
+
+                    break;
+                case 3: //
+                    /*
+                     *  O O O O
+                     *  O O O O
+                     *  2 1 O O
+                     *  O 3 4 O
+                    */
+
+                    break;
+                default:
+                    break;
+            }
+            break;
+        default:
+            break;
+    }
+
 }
 void piece::moveRight(){
-    x++;
+    switch(type){
+        case 0: //I
+            switch(spin){
+                case 0: // Vertical Left
+                        /*
+                         *  O 4 O O
+                         *  O 3 O O
+                         *  O 1 O O
+                         *  O 2 O O
+                        */
+
+
+
+                    break;
+                case 1: // Horizontal Lower
+                        /*
+                         *  O O O O
+                         *  O O O O
+                         *  2 1 3 4
+                         *  O O O O
+                        */
+
+
+                    break;
+                case 2: // Vertical Right
+                        /*
+                         *  O O 4 O
+                         *  O O 3 O
+                         *  O O 1 O
+                         *  O O 2 O
+                        */
+
+
+                    break;
+                case 3: // Horizontal Upper
+                        /*
+                         *  O O O O
+                         *  2 1 3 4
+                         *  O O O O
+                         *  O O O O
+                        */
+
+
+                    break;
+                default:
+                    break;
+            }
+            break;
+        case 1: //J
+            switch(spin){
+                case 0: //
+                    /*
+                     *  O 4 O O
+                     *  O 3 O O
+                     *  2 1 O O
+                     *  O O O O
+                    */
+
+
+                    break;
+                case 1: //
+                    /*
+                     *  O O O O
+                     *  O 2 O O
+                     *  O 1 3 4
+                     *  O O O O
+                    */
+
+
+                    break;
+                case 2: //
+                    /*
+                     *  O O O O
+                     *  O 1 2 O
+                     *  O 3 O O
+                     *  O 4 O O
+                    */
+
+                    break;
+                case 3: //
+                    /*
+                     *  O O O O
+                     *  4 3 1 O
+                     *  O O 2 O
+                     *  O O O O
+                    */
+
+
+                    break;
+                default:
+                    break;
+            }
+            break;
+        case 2: //L
+            switch(spin){
+                case 0: //
+                    /*
+                     *  O 4 O O
+                     *  O 3 O O
+                     *  O 1 2 O
+                     *  O O O O
+                    */
+
+
+                    break;
+                case 1: //
+                    /*
+                     *  O O O O
+                     *  O O O O
+                     *  O 1 3 4
+                     *  O 2 O O
+                    */
+
+
+                    break;
+                case 2: //
+                    /*
+                     *  O O O O
+                     *  O 2 1 O
+                     *  O O 3 O
+                     *  O O 4 O
+                    */
+
+
+                    break;
+                case 3: //
+                    /*
+                     *  O O O O
+                     *  O O 2 O
+                     *  4 3 1 O
+                     *  O O O O
+                    */
+
+
+                    break;
+                default:
+                    break;
+            }
+            break;
+        case 3: //O
+
+
+            break;
+        case 4: //S
+            switch(spin){
+                    case 0: //
+                    /*
+                     *  O O O O
+                     *  O 2 o O
+                     *  3 1 o O
+                     *  4 O O O
+                    */
+
+                    break;
+                case 1: //
+                    /*
+                     *  O O O O
+                     *  4 3 O O
+                     *  O 1 2 O
+                     *  O O O O
+                    */
+
+
+
+                    break;
+                case 2: //
+                    /*
+                     *  O O O O
+                     *  O O 4 O
+                     *  O 1 3 O
+                     *  O 2 O O
+                    */
+
+
+                    break;
+                case 3: //
+                    /*
+                     *  O O O O
+                     *  O O O O
+                     *  2 1 O O
+                     *  O 3 4 O
+                    */
+
+
+
+                    break;
+                default:
+                    break;
+            }
+            break;
+        case 5: //T
+            switch(spin){
+                case 0: //
+                    /*
+                     *  O O O O
+                     *  O O O O
+                     *  3 1 4 O
+                     *  O 2 O O
+                    */
+
+
+                    break;
+                case 1: //
+                    /*
+                     *  O O O O
+                     *  O 3 O O
+                     *  2 1 O O
+                     *  O 4 O O
+                    */
+
+
+                    break;
+                case 2: //
+                    /*
+                     *  O O O O
+                     *  O 2 O O
+                     *  O 1 3 O
+                     *  O 4 O O
+                    */
+
+
+                    break;
+                case 3: //
+                    /*
+                     *  O O O O
+                     *  O O O O
+                     *  4 1 2 O
+                     *  O 3 O O
+                    */
+
+
+                    break;
+                default:
+                    break;
+            }
+            break;
+        case 6: //Z
+            switch(spin){
+                case 0: //
+                    /*
+                     *  O O O O
+                     *  O 2 O O
+                     *  3 1 O O
+                     *  4 O O O
+                    */
+
+
+                    break;
+                case 1: //
+                    /*
+                     *  O O O O
+                     *  4 3 O O
+                     *  O 1 2 O
+                     *  O O O O
+                    */
+
+
+                    break;
+                case 2: //
+                    /*
+                     *  O O O O
+                     *  O O 4 O
+                     *  O 1 3 O
+                     *  O 2 O O
+                    */
+
+
+                    break;
+                case 3: //
+                    /*
+                     *  O O O O
+                     *  O O O O
+                     *  2 1 O O
+                     *  O 3 4 O
+                    */
+
+                    break;
+                default:
+                    break;
+            }
+            break;
+        default:
+            break;
+    }
+
 }
 void piece::rotate(){
     if(spin == 3){

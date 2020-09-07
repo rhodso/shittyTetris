@@ -33,6 +33,7 @@ public:
     void moveRight();
     void rotate();
     void drop();
+    bool doCollision();
 
 
 private:
