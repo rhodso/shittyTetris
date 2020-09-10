@@ -31,6 +31,8 @@ void grid::setLineColour( ofColor _lineColour){ lineColour = _lineColour; }
 //Methods to allow other classes to interface with the grid easily
 void grid::setTileColour(int _x, int _y, ofColor _colour){ gameSpace[_x][_y].setColour(_colour); }
 ofColor grid::getTileColour(int _x, int _y){ return gameSpace[_x][_y].getColour(); }
+void grid::setTileIsOccupied(int _x, int _y, bool _isOccupied){ gameSpace[_x][_y].setIsOccupied(_isOccupied); }
+bool grid::getTileIsOccupied(int _x, int _y){ return gameSpace[_x][_y].getIsOccupied(); }
 
 //Other methods
 void grid::createGrid(){

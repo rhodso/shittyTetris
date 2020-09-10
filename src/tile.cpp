@@ -22,6 +22,7 @@ float tile::getGridX(){ return gridX; }
 float tile::getGridY(){ return gridY; }
 ofColor tile::getColour(){ return colour; }
 float tile::getSize(){ return size; }
+bool tile::getIsOccupied(){ return isOccupied; }
 
 void tile::setX( float _x){ x = _x; }
 void tile::setY( float _y){ y = _y; }
@@ -29,6 +30,7 @@ void tile::setGridX( float _gridX){ gridX = _gridX; }
 void tile::setGridY( float _gridY){ gridY = _gridY; }
 void tile::setSize(float _size){ size = _size; }
 void tile::setColour( ofColor _colour){ colour = _colour; }
+void tile::setIsOccupied( bool _isOccupied){ isOccupied = _isOccupied; }
 
 void tile::draw(){
 	//Set to correct colour and draw square

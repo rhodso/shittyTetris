@@ -31,13 +31,15 @@ public:
 	//Methods for interfacing with the grid's colours
 	static void setTileColour(int _x, int _y, ofColor _colour);
 	static ofColor getTileColour(int _x, int _y);
+    static void setTileIsOccupied(int _x, int _y, bool _isOccupied);
+    static bool getTileIsOccupied(int _x, int _y);
 
 	//Other methods
 	void createGrid();
     static void resetGrid();
     void drawGrid();
     void drawGridDebug();
-
+    void setOccupied();
 
 private:
 

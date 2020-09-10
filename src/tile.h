@@ -18,6 +18,7 @@ public:
 	float getGridY();
 	ofColor getColour();
 	static float getSize();
+    bool getIsOccupied();
 
 	void setX( float _x );
 	void setY( float _y );
@@ -25,6 +26,7 @@ public:
 	void setGridY( float _gridY);
 	static void setSize( float _size );
 	void setColour( ofColor _colour );
+    void setIsOccupied( bool _isOccupied);
 
 	//Draw the tile
 	void draw();
@@ -45,6 +47,8 @@ private:
 
 	//Size
 	inline static float size = 30;
+
+    bool isOccupied;
 
 };
 
