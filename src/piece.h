@@ -34,6 +34,7 @@ public:
     void rotate();
     void drop();
     bool doCollision();
+    void unsetOccupied();
 
 
 private:

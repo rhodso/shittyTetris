@@ -127,3 +127,14 @@ void grid::resetGrid(){
             }
         }
 }
+
+void grid::setOccupied(){
+    //For each tile, if the colour is black then set it to not occupied, if not, then it is
+    for(vector<tile> x : gameSpace){
+        for(tile t : x){
+            t.setIsOccupied( t.getColour() != ofColor::black );
+            //if(debugger::getDebug()){ t.debugDraw(); }
+        }
+    }
+
+}

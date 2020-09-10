@@ -714,9 +714,6 @@ bool piece::checkLanded(){
 }
 void piece::moveDown(){
 
-    int trgX = 0;
-    int trgY = 0;
-
     if(y < grid::getGH()){
         switch(type){
             case 0: //I
@@ -729,11 +726,14 @@ void piece::moveDown(){
                              *  O 2 O O
                             */
 
-                            trgX = x;
-                            trgY = y + 3;
+                            debugger::log("Piece is vertical left");
+                            debugger::log("My coords (at 1) are X:" + std::to_string((int) x)+ " Y: " + std::to_string((int) y));
 
-                            if(grid::getTileColour(trgX, trgY) != ofColor::black){
+                            if(grid::getTileIsOccupied(x, (y+2))){
+                                debugger::log("Tile below (X:" + std::to_string((int) x) + ", Y:" + std::to_string((int)  (y+2)) + ") is not occupied");
                                 y++;
+                            } else {
+                                debugger::log("Tile below (X:" + std::to_string((int) x) + ", Y:" + std::to_string((int)  (y+2)) + ") is occupied");
                             }
 
                         break;
@@ -745,10 +745,12 @@ void piece::moveDown(){
                              *  O O O O
                             */
 
-                            if(grid::getTileColour(x, y--) != ofColor::black){
-                                if(grid::getTileColour(x--, y--) != ofColor::black){
-                                    if(grid::getTileColour(x++, y--) != ofColor::black){
-                                        if(grid::getTileColour(x -= 2, y--) != ofColor::black){
+                            debugger::log("Piece is horizontal lower");
+
+                            if(grid::getTileIsOccupied(x, y++)){
+                                if(grid::getTileIsOccupied((x-1), y++)){
+                                    if(grid::getTileIsOccupied((x+1), y++)){
+                                        if(grid::getTileIsOccupied((x+2), y++)){
                                             y++;
                                         }
                                     }
@@ -764,10 +766,9 @@ void piece::moveDown(){
                              *  O O 2 O
                             */
 
-                            trgX = x;
-                            trgY = y + 3;
+                            debugger::log("Piece is vertical right");
 
-                            if(grid::getTileColour(trgX, trgY) != ofColor::black){
+                            if(grid::getTileIsOccupied(x, (y+3))){
                                 y++;
                             }
 
@@ -781,10 +782,12 @@ void piece::moveDown(){
                              *  O O O O
                             */
 
-                            if(grid::getTileColour(x, y--) != ofColor::black){
-                                if(grid::getTileColour(x--, y--) != ofColor::black){
-                                    if(grid::getTileColour(x++, y--) != ofColor::black){
-                                        if(grid::getTileColour(x -= 2, y--) != ofColor::black){
+                            debugger::log("Piece is Horizontal upper");
+
+                            if(grid::getTileIsOccupied(x, y++)){
+                                if(grid::getTileIsOccupied((x-1), y++)){
+                                    if(grid::getTileIsOccupied((x+1), y++)){
+                                        if(grid::getTileIsOccupied((x+2), y++)){
                                             y++;
                                         }
                                     }
@@ -1620,6 +1623,395 @@ void piece::rotate(){
 void piece::drop(){
     while(!checkLanded()){
         moveDown();
+    }
+}
+void piece::unsetOccupied(){
+    switch(type){
+        case 0: //I
+            switch(spin){
+                case 0: // Vertical Left
+                        /*
+                         *  O 4 O O
+                         *  O 3 O O
+                         *  O 1 O O
+                         *  O 2 O O
+                        */
+
+                        grid::setTileIsOccupied(x,y,false); //1
+                        grid::setTileIsOccupied(x,y+1,false); //2
+                        grid::setTileIsOccupied(x,y-1,false); //3
+                        grid::setTileIsOccupied(x,y-2,false); //4
+
+                    break;
+                case 1: // Horizontal Lower
+                        /*
+                         *  O O O O
+                         *  O O O O
+                         *  2 1 3 4
+                         *  O O O O
+                        */
+
+                        grid::setTileIsOccupied(x,y,false); //1
+                        grid::setTileIsOccupied(x-1,y,false); //2
+                        grid::setTileIsOccupied(x+1,y,false); //3
+                        grid::setTileIsOccupied(x+2,y,false); //4
+
+                    break;
+                case 2: // Vertical Right
+                        /*
+                         *  O O 4 O
+                         *  O O 3 O
+                         *  O O 1 O
+                         *  O O 2 O
+                        */
+
+                        grid::setTileIsOccupied(x+1,y,false); //1
+                        grid::setTileIsOccupied(x+1,y+1,false); //2
+                        grid::setTileIsOccupied(x+1,y-1,false); //3
+                        grid::setTileIsOccupied(x+1,y-2,false); //4
+
+                    break;
+                case 3: // Horizontal Upper
+                        /*
+                         *  O O O O
+                         *  2 1 3 4
+                         *  O O O O
+                         *  O O O O
+                        */
+
+                        grid::setTileIsOccupied(x,y-1,false); //1
+                        grid::setTileIsOccupied(x-1,y-1,false); //2
+                        grid::setTileIsOccupied(x+1,y-1,false); //3
+                        grid::setTileIsOccupied(x+2,y-1,false); //4
+
+                    break;
+                default:
+                    break;
+            }
+            break;
+        case 1: //J
+            switch(spin){
+                case 0: //
+                    /*
+                     *  O 4 O O
+                     *  O 3 O O
+                     *  2 1 O O
+                     *  O O O O
+                    */
+
+                    grid::setTileIsOccupied(x,y,false); //1
+                    grid::setTileIsOccupied(x-1,y,false); //2
+                    grid::setTileIsOccupied(x,y-1,false); //3
+                    grid::setTileIsOccupied(x,y-2,false); //4
+
+                    break;
+                case 1: //
+                    /*
+                     *  O O O O
+                     *  O 2 O O
+                     *  O 1 3 4
+                     *  O O O O
+                    */
+
+                    grid::setTileIsOccupied(x,y,false); //1
+                    grid::setTileIsOccupied(x,y-1,false); //2
+                    grid::setTileIsOccupied(x+1,y,false); //3
+                    grid::setTileIsOccupied(x+2,y,false); //4
+
+                    break;
+                case 2: //
+                    /*
+                     *  O O O O
+                     *  O 1 2 O
+                     *  O 3 O O
+                     *  O 4 O O
+                    */
+
+                    grid::setTileIsOccupied(x,y,false); //1
+                    grid::setTileIsOccupied(x+1,y,false); //2
+                    grid::setTileIsOccupied(x,y+1,false); //3
+                    grid::setTileIsOccupied(x,y+2,false); //4
+
+                    break;
+                case 3: //
+                    /*
+                     *  O O O O
+                     *  4 3 1 O
+                     *  O O 2 O
+                     *  O O O O
+                    */
+
+                    grid::setTileIsOccupied(x,y,false); //1
+                    grid::setTileIsOccupied(x-1,y,false); //2
+                    grid::setTileIsOccupied(x-2,y,false); //3
+                    grid::setTileIsOccupied(x,y+1,false); //4
+
+                    break;
+                default:
+                    break;
+            }
+            break;
+        case 2: //L
+            switch(spin){
+                case 0: //
+                    /*
+                     *  O 4 O O
+                     *  O 3 O O
+                     *  O 1 2 O
+                     *  O O O O
+                    */
+
+                    grid::setTileIsOccupied(x,y,false); //1
+                    grid::setTileIsOccupied(x+1,y,false); //2
+                    grid::setTileIsOccupied(x,y-1,false); //3
+                    grid::setTileIsOccupied(x,y-2,false); //4
+
+                    break;
+                case 1: //
+                    /*
+                     *  O O O O
+                     *  O 1 3 4
+                     *  O 2 O O
+                     *  O O O O
+                    */
+
+                    grid::setTileIsOccupied(x,y,false); //1
+                    grid::setTileIsOccupied(x,y+1,false); //2
+                    grid::setTileIsOccupied(x+1,y,false); //3
+                    grid::setTileIsOccupied(x+2,y,false); //4
+
+                    break;
+                case 2: //
+                    /*
+                     *  O O O O
+                     *  2 1 O O
+                     *  O 3 O O
+                     *  O 4 O O
+                    */
+
+                    grid::setTileIsOccupied(x,y,false); //1
+                    grid::setTileIsOccupied(x-1,y,false); //2
+                    grid::setTileIsOccupied(x,y+1,false); //3
+                    grid::setTileIsOccupied(x,y+2,false); //4
+
+                    break;
+                case 3: //
+                    /*
+                     *  O O 2 O
+                     *  4 3 1 O
+                     *  O O O O
+                     *  O O O O
+                    */
+
+                    grid::setTileIsOccupied(x,y,false); //1
+                    grid::setTileIsOccupied(x,y-1,false); //2
+                    grid::setTileIsOccupied(x-1,y,false); //3
+                    grid::setTileIsOccupied(x-2,y,false); //4
+
+                    break;
+                default:
+                    break;
+            }
+            break;
+        case 3: //O
+
+                //Spin doesn't make a diference lol
+                grid::setTileIsOccupied(x,y,false);
+                grid::setTileIsOccupied(x+1,y,false);
+                grid::setTileIsOccupied(x,y+1,false);
+                grid::setTileIsOccupied(x+1,y+1,false);
+
+            break;
+        case 4: //S
+            switch(spin){
+                    case 0: //
+                    /*
+                     *  O O O O
+                     *  O 2 o O
+                     *  3 1 o O
+                     *  4 O O O
+                    */
+
+                    grid::setTileIsOccupied(x,y,false); //1
+                    grid::setTileIsOccupied(x,y-1,false); //2
+                    grid::setTileIsOccupied(x-1,y,false); //3
+                    grid::setTileIsOccupied(x-1,y+1,false); //4
+
+                    break;
+                case 1: //
+                    /*
+                     *  O O O O
+                     *  4 3 O O
+                     *  O 1 2 O
+                     *  O O O O
+                    */
+
+                    grid::setTileIsOccupied(x,y,false); //1
+                    grid::setTileIsOccupied(x+1,y,false); //2
+                    grid::setTileIsOccupied(x,y-1,false); //3
+                    grid::setTileIsOccupied(x-1,y-1,false); //4
+
+
+                    break;
+                case 2: //
+                    /*
+                     *  O O O O
+                     *  O O 4 O
+                     *  O 1 3 O
+                     *  O 2 O O
+                    */
+
+                    grid::setTileIsOccupied(x,y,false); //1
+                    grid::setTileIsOccupied(x,y+1,false); //2
+                    grid::setTileIsOccupied(x+1,y,false); //3
+                    grid::setTileIsOccupied(x+1,y-1,false); //4
+
+                    break;
+                case 3: //
+                    /*
+                     *  O O O O
+                     *  O O O O
+                     *  2 1 O O
+                     *  O 3 4 O
+                    */
+
+                    grid::setTileIsOccupied(x,y,false); //1
+                    grid::setTileIsOccupied(x-1,y,false); //2
+                    grid::setTileIsOccupied(x,y+1,false); //3
+                    grid::setTileIsOccupied(x+1,y+1,false); //4
+
+
+                    break;
+                default:
+                    break;
+            }
+            break;
+        case 5: //T
+            switch(spin){
+                case 0: //
+                    /*
+                     *  O O O O
+                     *  O O O O
+                     *  3 1 4 O
+                     *  O 2 O O
+                    */
+
+                    grid::setTileIsOccupied(x,y,false); //1
+                    grid::setTileIsOccupied(x,y+1,false); //2
+                    grid::setTileIsOccupied(x-1,y,false); //3
+                    grid::setTileIsOccupied(x+1,y,false); //4
+
+                    break;
+                case 1: //
+                    /*
+                     *  O O O O
+                     *  O 3 O O
+                     *  2 1 O O
+                     *  O 4 O O
+                    */
+
+                    grid::setTileIsOccupied(x,y,false); //1
+                    grid::setTileIsOccupied(x-1,y,false); //2
+                    grid::setTileIsOccupied(x,y-1,false); //3
+                    grid::setTileIsOccupied(x,y+1,false); //4
+
+                    break;
+                case 2: //
+                    /*
+                     *  O O O O
+                     *  O 2 O O
+                     *  4 1 3 O
+                     *  O 4 O O
+                    */
+
+                    grid::setTileIsOccupied(x,y,false); //1
+                    grid::setTileIsOccupied(x,y-1,false); //2
+                    grid::setTileIsOccupied(x+1,y,false); //3
+                    grid::setTileIsOccupied(x-1,y,false); //4
+
+                    break;
+                case 3: //
+                    /*
+                     *  O O O O
+                     *  O 4 O O
+                     *  O 1 2 O
+                     *  O 3 O O
+                    */
+
+                    grid::setTileIsOccupied(x,y,false); //1
+                    grid::setTileIsOccupied(x+1,y,false); //2
+                    grid::setTileIsOccupied(x,y+1,false); //3
+                    grid::setTileIsOccupied(x,y-1,false); //4
+
+                    break;
+                default:
+                    break;
+            }
+            break;
+        case 6: //Z
+            switch(spin){
+                case 0: //
+                    /*
+                     *  O O O O
+                     *  O 2 O O
+                     *  3 1 O O
+                     *  4 O O O
+                    */
+
+                    grid::setTileIsOccupied(x,y,false); //1
+                    grid::setTileIsOccupied(x,y-1,false); //2
+                    grid::setTileIsOccupied(x-1,y,false); //3
+                    grid::setTileIsOccupied(x-1,y+1,false); //4
+
+                    break;
+                case 1: //
+                    /*
+                     *  O O O O
+                     *  4 3 O O
+                     *  O 1 2 O
+                     *  O O O O
+                    */
+
+                    grid::setTileIsOccupied(x,y,false); //1
+                    grid::setTileIsOccupied(x+1,y,false); //2
+                    grid::setTileIsOccupied(x,y-1,false); //3
+                    grid::setTileIsOccupied(x-1,y-1,false); //4
+
+                    break;
+                case 2: //
+                    /*
+                     *  O O O O
+                     *  O O 4 O
+                     *  O 1 3 O
+                     *  O 2 O O
+                    */
+
+                    grid::setTileIsOccupied(x,y,false); //1
+                    grid::setTileIsOccupied(x,y+1,false); //2
+                    grid::setTileIsOccupied(x+1,y,false); //3
+                    grid::setTileIsOccupied(x+1,y-1,false); //4
+
+                    break;
+                case 3: //
+                    /*
+                     *  O O O O
+                     *  O O O O
+                     *  2 1 O O
+                     *  O 3 4 O
+                    */
+
+                    grid::setTileIsOccupied(x,y,false); //1
+                    grid::setTileIsOccupied(x-1,y,false); //2
+                    grid::setTileIsOccupied(x,y+1,false); //3
+                    grid::setTileIsOccupied(x+1,y+1,false); //4
+
+                    break;
+                default:
+                    break;
+            }
+            break;
+        default:
+            break;
     }
 }
 

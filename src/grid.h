@@ -39,7 +39,7 @@ public:
     static void resetGrid();
     void drawGrid();
     void drawGridDebug();
-    void setOccupied();
+    static void setOccupied();
 
 private:
 

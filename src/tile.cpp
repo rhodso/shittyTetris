@@ -2,16 +2,20 @@
 #include "debugger.h"
 
 //Constructors and destructors
-tile::tile(){}
+tile::tile(){
+    isOccupied = false;
+}
 
 tile::tile(float _x, float _y){
 	x = _x;
 	y = _y;
+    isOccupied = false;
 }
 tile::tile(float _x, float _y, ofColor _c){
 	x = _x;
 	y = _y;
 	colour = _c;
+    isOccupied = false;
 }
 tile::~tile(){}
 
@@ -40,5 +44,19 @@ void tile::draw(){
 
 void tile::debugDraw(){
     if(colour == ofColor::black){ ofSetColor(ofColor::white); } else { ofSetColor(ofColor::black); }
-    ofDrawBitmapString("X:" + std::to_string((int) x) + "\nY:" + std::to_string((int) y) + "\n(" + std::to_string((int) gridX) + "," + std::to_string((int) gridY) + ")",x-(size/2.0),y-10);
+   /*
+    ofDrawBitmapString("X:" + std::to_string((int) x)
+                       + "\nY:" + std::to_string((int) y)
+                       + "\n(" + std::to_string((int) gridX)
+                       + "," + std::to_string((int) gridY)
+                       + ")",
+                       x-(size/2.0),
+                       y-10);
+
+                       */
+    if(isOccupied){
+        ofDrawBitmapString("O",x,y);
+    } else {
+        ofDrawBitmapString("C",x,y);
+    }
 }

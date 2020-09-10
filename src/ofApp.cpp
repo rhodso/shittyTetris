@@ -35,6 +35,7 @@ void ofApp::update(){
     //debugger::log("P - X: " + std::to_string(p.getX()) + ", Y: " + std::to_string(p.getY()));
     frameCount++;
     handleKeypresses();
+    grid::setOccupied();
     gme.updateHUD();
 
     if(grid::getDoUpdate()){
@@ -47,14 +48,19 @@ void ofApp::update(){
 
 void ofApp::draw(){
     ofBackground(60);
-     p.draw();
+    p.draw();
     gme.drawHUD();
 
+
+    g.setTileColour(0,10,ofColor::blue);
+    g.setTileColour(5,10,ofColor::green);
+    g.setTileColour(0,15,ofColor::red);
+    g.setTileColour(5,15,ofColor::yellow);
+
     /*
-    g.setTileColour(0,0,ofColor::blue);
-    g.setTileColour(5,0,ofColor::green);
-    g.setTileColour(0,5,ofColor::red);
-    g.setTileColour(5,5,ofColor::yellow);
+    if(gme.getPieceInPlay()){
+        gme.getCurrentPiece()->unsetOccupied();
+    }
     */
 
     g.drawGrid();
@@ -70,6 +76,7 @@ void ofApp::draw(){
     ofDrawCircle(60,60,10);
 
 
+    g.drawGridDebug();
 }
 
 void ofApp::handleKeypresses(){
@@ -93,6 +100,7 @@ void ofApp::handleKeypresses(){
 
     //S
     if(keys[115]){
+        debugger::log("Moving piece down");
         p.moveDown();
         keys[115] = false;
     }
