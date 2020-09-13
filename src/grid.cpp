@@ -138,3 +138,23 @@ void grid::setOccupied(){
     }
 
 }
+
+void grid::saveGrid(){
+    for(vector<tile> x : gameSpace){
+        for(tile t : x){ //For each tile in gameSpace
+            if(t.getColour() != ofColor::black){ //If the colour isn't black
+                tileList.push_back(t); //Add to list
+            }
+        }
+    }
+}
+
+void grid::restoreGrid(){
+    //For each tile, restore to the grid
+    for(tile t : tileList){
+        setTileColour(t.getGridX(), t.getGridY(), t.getColour());
+    }
+    //Emptry list from previous frame
+    tileList.clear();
+
+}

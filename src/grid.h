@@ -40,6 +40,9 @@ public:
     void drawGrid();
     void drawGridDebug();
     static void setOccupied();
+    static void saveGrid();
+    static void restoreGrid();
+
 
 private:
 
@@ -48,6 +51,7 @@ private:
 
 	//2D vector for holding all the tiles
 	inline static std::vector<std::vector<tile>> gameSpace;
+    inline static std::vector<tile> tileList;
 
 	inline static int gH = 30; //Game Height
 	inline static int gW = 30; //Game Width

@@ -29,17 +29,25 @@ void ofApp::setup(){
 
     debugger::log("Creating test piece");
     p = piece(5,5,0,0, ofColor::darkBlue);
+
+    g.setTileColour(0,10,ofColor::blue);
+    g.setTileColour(5,10,ofColor::green);
+    g.setTileColour(0,15,ofColor::red);
+    g.setTileColour(5,15,ofColor::yellow);
+
 }
 
 void ofApp::update(){
     //debugger::log("P - X: " + std::to_string(p.getX()) + ", Y: " + std::to_string(p.getY()));
     frameCount++;
     handleKeypresses();
-    grid::setOccupied();
-    gme.updateHUD();
 
     if(grid::getDoUpdate()){
+        grid::saveGrid();
         grid::resetGrid();
+        grid::restoreGrid();
+
+        gme.updateHUD();
     }
 
     //debugger::log("Key 32 state: " + std::to_string(keys[32]));
@@ -51,12 +59,6 @@ void ofApp::draw(){
     p.draw();
     gme.drawHUD();
 
-
-    g.setTileColour(0,10,ofColor::blue);
-    g.setTileColour(5,10,ofColor::green);
-    g.setTileColour(0,15,ofColor::red);
-    g.setTileColour(5,15,ofColor::yellow);
-
     /*
     if(gme.getPieceInPlay()){
         gme.getCurrentPiece()->unsetOccupied();
@@ -64,7 +66,10 @@ void ofApp::draw(){
     */
 
     g.drawGrid();
-    //g.drawGridDebug();
+
+    grid::setOccupied();
+
+    g.drawGridDebug();
 
     ofSetColor(ofColor::blue);
     ofDrawCircle(10,10,10);
@@ -74,9 +79,6 @@ void ofApp::draw(){
     ofDrawCircle(10,60,10);
     ofSetColor(ofColor::yellow);
     ofDrawCircle(60,60,10);
-
-
-    g.drawGridDebug();
 }
 
 void ofApp::handleKeypresses(){
